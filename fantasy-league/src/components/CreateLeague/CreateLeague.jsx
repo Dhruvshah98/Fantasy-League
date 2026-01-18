@@ -16,6 +16,8 @@ function CreateLeague({ onCreate, onBack }) {
     const nextStep = () => setStep(step + 1);
     const prevStep = () => setStep(step - 1);
 
+
+
     return (
         <>
             <button onClick={onBack}>← Back</button>
@@ -51,6 +53,7 @@ function CreateLeague({ onCreate, onBack }) {
                 <StepReview
                     leagueData={leagueData}
                     onBack={prevStep}
+                    onCreate={onCreate}
                 />
             )}
         </>

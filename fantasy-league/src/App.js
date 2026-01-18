@@ -1,27 +1,27 @@
 import { useState } from "react";
 import CreateLeague from "./components/CreateLeague/CreateLeague";
 import JoinLeague from "./components/JoinLeague";
-import LeagueList from "./components/LeagueList";
 
 function App() {
-  // const [leagues, setLeagues] = useState([]);
-  // const handleCreateLeague = (name) => {
-  //   setLeagues(prevLeagues => [
-  //     ...prevLeagues,
-  //     {
-  //       id: Date.now(),
-  //       name
-  //     }
-  //   ]);
-  // };
-  // return (
-  //   <div>
-  //     <h1>Fantasy League App</h1>
-  //     <CreateLeague onCreate={handleCreateLeague} />
-  //     <LeagueList leagues={leagues} />
-  //   </div>
-  // );
   const [screen, setScreen] = useState("HOME");
+  const [leagues, setLeagues] = useState([]);
+  const generateLeagueCode = () => {
+    return Math.random().toString(36).substring(2, 8).toUpperCase();
+  };
+  const handleCreateLeague = (leagueData) => {
+    const newLeague = {
+      ...leagueData,
+      id: Date.now(),
+      code: generateLeagueCode(),
+      teams: []
+    };
+
+    setLeagues((prev) => [...prev, newLeague]);
+    setScreen("HOME");
+
+    console.log("Leagues:", newLeague);
+  };
+
   return (
     <div>
       <h1>Fantasy League App</h1>
@@ -36,8 +36,8 @@ function App() {
           </button>
         </div>
       )}
-      {screen === "CREATE" && <CreateLeague onBack={() => setScreen("HOME")} />}
-      {screen === "JOIN" && <JoinLeague onBack={() => setScreen("HOME")} />}
+      {screen === "CREATE" && <CreateLeague onBack={() => setScreen("HOME")} onCreate={handleCreateLeague} />}
+      {screen === "JOIN" && <JoinLeague leagues={leagues} onBack={() => setScreen("HOME")} />}
     </div>
   )
 }

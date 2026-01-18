@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 
-const JoinLeague = ({ onBack }) => {
-    const [leagueCode, setLeagueCode] = useState('')
+const JoinLeague = ({ leagues, onBack }) => {
+    const [code, setCode] = useState("");
+    const [error, setError] = useState("");
     const handleJoin = () => {
-        console.log('====================================');
-        console.log("Joining League:", leagueCode);
-        console.log('====================================');
+        const league = leagues.find((l) => l.code === code);
+
+        if (!league) {
+            setError("Invalid league code");
+            return;
+        }
+
+        alert(`Joined league: ${league.name}`);
     }
     return (
         <div>
@@ -14,11 +20,12 @@ const JoinLeague = ({ onBack }) => {
             <input
                 type="text"
                 placeholder='Enter League Code'
-                value={leagueCode}
-                onChange={(e) => setLeagueCode(e.target.value)}
+                value={code}
+                onChange={(e) => setCode(e.target.value.toUpperCase())}
             />
 
             <button onClick={handleJoin}>Join Now!</button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
         </div>
     )
 }

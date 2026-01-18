@@ -1,9 +1,4 @@
-function StepLeagueSettings({
-    leagueData,
-    setLeagueData,
-    onNext,
-    onBack
-}) {
+function StepLeagueSettings({ leagueData, setLeagueData, onNext, onBack }) {
     return (
         <div>
             <h3>League Settings</h3>
@@ -21,6 +16,24 @@ function StepLeagueSettings({
                 />
                 Private League
             </label>
+
+            <div>
+                <label>
+                    Players Per Team:
+                    <input
+                        type="number"
+                        min="1"
+                        max={leagueData.players.length || 11}
+                        value={leagueData.teamSize}
+                        onChange={(e) =>
+                            setLeagueData({
+                                ...leagueData,
+                                teamSize: Number(e.target.value)
+                            })
+                        }
+                    />
+                </label>
+            </div>
 
             <div>
                 <button onClick={onBack}>Back</button>
