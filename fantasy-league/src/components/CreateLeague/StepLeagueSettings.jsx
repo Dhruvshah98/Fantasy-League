@@ -3,7 +3,7 @@ function StepLeagueSettings({ leagueData, setLeagueData, onNext, onBack }) {
         <div>
             <h3>League Settings</h3>
 
-            <label>
+            {/* <label>
                 <input
                     type="checkbox"
                     checked={leagueData.isPrivate}
@@ -15,7 +15,7 @@ function StepLeagueSettings({ leagueData, setLeagueData, onNext, onBack }) {
                     }
                 />
                 Private League
-            </label>
+            </label> */}
 
             <div>
                 <label>

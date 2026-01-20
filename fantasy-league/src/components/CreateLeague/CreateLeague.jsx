@@ -9,7 +9,7 @@ function CreateLeague({ onCreate, onBack }) {
     const [leagueData, setLeagueData] = useState({
         name: "",
         description: "",
-        isPrivate: false,
+        // isPrivate: false,
         players: []
     });
 

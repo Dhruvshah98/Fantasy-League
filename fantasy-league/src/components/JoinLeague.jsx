@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const JoinLeague = ({ leagues, onBack }) => {
+const JoinLeague = ({ leagues, onBack, onJoin }) => {
     const [code, setCode] = useState("");
     const [error, setError] = useState("");
     const handleJoin = () => {
@@ -11,7 +11,7 @@ const JoinLeague = ({ leagues, onBack }) => {
             return;
         }
 
-        alert(`Joined league: ${league.name}`);
+        onJoin(league)
     }
     return (
         <div>
