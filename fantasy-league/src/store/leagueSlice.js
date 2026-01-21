@@ -12,6 +12,8 @@ const leagueSlice = createSlice({
     reducers: {
         createLeague(state, action) {
             state.leagues.push(action.payload);
+            state.activeLeague = action.payload;
+            state.screen = "LEAGUE_CREATED";
         },
         joinLeague(state, action) {
             state.activeLeague = action.payload;

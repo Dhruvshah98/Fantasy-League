@@ -1,32 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { joinLeague, setScreen } from '../store/leagueSlice';
 
-const JoinLeague = ({ leagues, onBack, onJoin }) => {
+const JoinLeague = () => {
+    const dispatch = useDispatch();
+    const leagues = useSelector(
+        (state) => state.league.leagues
+    );
     const [code, setCode] = useState("");
     const [error, setError] = useState("");
     const handleJoin = () => {
         const league = leagues.find((l) => l.code === code);
-
         if (!league) {
             setError("Invalid league code");
             return;
         }
-
-        onJoin(league)
+        dispatch(joinLeague(league))
     }
     return (
-        <div>
-            <button onClick={onBack}>← Back</button>
+        <>
+            <button onClick={() => dispatch(setScreen("HOME"))}>
+                ← Back
+            </button>
+
             <h2>Join League</h2>
+
             <input
-                type="text"
-                placeholder='Enter League Code'
+                placeholder="Enter league code"
                 value={code}
-                onChange={(e) => setCode(e.target.value.toUpperCase())}
+                onChange={(e) => {
+                    setCode(e.target.value);
+                    setError("");
+                }}
             />
 
-            <button onClick={handleJoin}>Join Now!</button>
+            <button onClick={handleJoin}>Join</button>
+
             {error && <p style={{ color: "red" }}>{error}</p>}
-        </div>
+        </>
     )
 }
 

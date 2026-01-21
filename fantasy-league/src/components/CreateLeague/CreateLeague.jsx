@@ -4,23 +4,39 @@ import StepLeagueSettings from "./StepLeagueSettings";
 import StepAddPlayers from "./StepAddPlayers";
 import StepReview from "./StepReview";
 
-function CreateLeague({ onCreate, onBack }) {
+import { useDispatch } from "react-redux";
+import { createLeague, setScreen } from "../../store/leagueSlice";
+
+function CreateLeague() {
+
+    const dispatch = useDispatch();
     const [step, setStep] = useState(1);
     const [leagueData, setLeagueData] = useState({
         name: "",
         description: "",
-        // isPrivate: false,
         players: []
     });
 
-    const nextStep = () => setStep(step + 1);
-    const prevStep = () => setStep(step - 1);
+    const nextStep = () => setStep((s) => s + 1);
+    const prevStep = () => setStep((s) => s - 1);
 
+    const handleFinalCreate = () => {
+        console.log("HANDLE FINAL CREATE CALLED");
+        dispatch(
+            createLeague({
+                ...leagueData,
+                id: Date.now(),
+                code: Math.random().toString(36).substring(2, 8).toUpperCase(),
+                teams: []
+            })
+        );
 
+        // dispatch(setScreen("HOME"));
+    };
 
     return (
         <>
-            <button onClick={onBack}>← Back</button>
+            <button onClick={() => dispatch(setScreen("HOME"))}>← Back</button>
             <h2>Create League</h2>
             {step === 1 && (
                 <StepLeagueInfo
@@ -53,7 +69,7 @@ function CreateLeague({ onCreate, onBack }) {
                 <StepReview
                     leagueData={leagueData}
                     onBack={prevStep}
-                    onCreate={onCreate}
+                    onConfirm={handleFinalCreate}
                 />
             )}
         </>

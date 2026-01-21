@@ -83,20 +83,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import CreateLeague from "./components/CreateLeague/CreateLeague";
 import JoinLeague from "./components/JoinLeague";
+import LeagueCreated from "./components/LeagueCreated";
 import CreateTeam from "./components/CreateTeam";
 import { setScreen } from "./store/leagueSlice";
 
 function App() {
   const dispatch = useDispatch();
   const screen = useSelector((state) => state.league.screen);
+  const leagues = useSelector((state) => state.league.leagues);
 
+  console.log("ALL LEAGUES:", leagues);
+
+  console.log("SCREEN FROM REDUX:", screen);
   return (
     <div>
       <h1>Fantasy League App</h1>
 
       {screen === "HOME" && (
         <div>
-          <button onClick={() => dispatch(setScreen("CREATE"))}>
+          <button
+            onClick={() => dispatch(setScreen("CREATE"))}
+          >
             Create League
           </button>
           <button onClick={() => dispatch(setScreen("JOIN"))}>
@@ -108,6 +115,7 @@ function App() {
       {screen === "CREATE" && <CreateLeague />}
       {screen === "JOIN" && <JoinLeague />}
       {screen === "CREATE_TEAM" && <CreateTeam />}
+      {screen === "LEAGUE_CREATED" && <LeagueCreated />}
     </div>
   );
 }

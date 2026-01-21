@@ -1,7 +1,7 @@
-function StepReview({ leagueData, onBack, onCreate }) {
-    const handleCreate = () => {
-        console.log("Final League Data:", leagueData);
-    };
+function StepReview({ leagueData, onBack, onConfirm }) {
+    // const onConfirm = () => {
+    //     console.log("Final League Data:", leagueData);
+    // };
 
     return (
         <div>
@@ -13,8 +13,13 @@ function StepReview({ leagueData, onBack, onCreate }) {
             <p><strong>Players:</strong> {leagueData.players.length}</p>
 
             <button onClick={onBack}>Back</button>
-            <button onClick={() => onCreate(leagueData)}>Create League</button>
-        </div>
+            <button
+                onClick={() => {
+                    console.log("STEP REVIEW CLICKED");
+                    onConfirm();
+                }}
+            >Create League</button>
+        </div >
     );
 }
 
