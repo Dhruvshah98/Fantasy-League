@@ -1,13 +1,13 @@
 function StepLeagueInfo({ leagueData, setLeagueData, onNext }) {
-    const handleChange = (e) => {
+    const handleChange = (event) => {
         setLeagueData({
             ...leagueData,
-            [e.target.name]: e.target.value
+            [event.target.name]: event.target.value
         });
     };
 
     return (
-        <div>
+        <div className="form-stack">
             <h3>League Info</h3>
 
             <input
@@ -20,13 +20,45 @@ function StepLeagueInfo({ leagueData, setLeagueData, onNext }) {
 
             <input
                 type="text"
+                name="adminName"
+                placeholder="Admin Name"
+                value={leagueData.adminName}
+                onChange={handleChange}
+            />
+
+            <input
+                type="password"
+                name="adminPassword"
+                placeholder="Admin Password"
+                value={leagueData.adminPassword}
+                onChange={handleChange}
+            />
+
+            <input
+                type="text"
                 name="description"
-                placeholder="Description"
+                placeholder="Description (optional)"
                 value={leagueData.description}
                 onChange={handleChange}
             />
 
-            <button onClick={onNext} disabled={!leagueData.name}>
+            <input
+                type="url"
+                name="googleSheetsUrl"
+                placeholder="Google Apps Script Webhook URL (optional)"
+                value={leagueData.googleSheetsUrl}
+                onChange={handleChange}
+            />
+
+            <button
+                className="primary-button"
+                onClick={onNext}
+                disabled={
+                    !leagueData.name.trim() ||
+                    !leagueData.adminName.trim() ||
+                    !leagueData.adminPassword.trim()
+                }
+            >
                 Next
             </button>
         </div>

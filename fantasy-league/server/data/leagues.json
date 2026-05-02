@@ -1,0 +1,36 @@
+{
+  "leagues": [
+    {
+      "id": "354d29be-54b7-4618-909a-bc447540e476",
+      "code": "24169B",
+      "name": "Suhrad PL",
+      "adminName": "ds",
+      "description": "jsn",
+      "teamSize": 1,
+      "createdAt": "2026-04-14T08:16:01.820Z",
+      "googleSheetsUrl": "",
+      "players": [
+        {
+          "id": "d2d7ff59-4de0-4b0e-ba27-b20dac7cabbb",
+          "name": "asd",
+          "position": "ST",
+          "points": 0,
+          "order": 1
+        }
+      ],
+      "teams": [
+        {
+          "id": "419c709c-f392-4571-882e-ac29d18f048c",
+          "managerName": "Dhruv",
+          "teamName": "DFC",
+          "selectedPlayerIds": [
+            "d2d7ff59-4de0-4b0e-ba27-b20dac7cabbb"
+          ],
+          "createdAt": "2026-04-14T08:16:42.015Z"
+        }
+      ],
+      "adminPasswordHash": "0b3659243e3eb91cd2da518ebbad79997209e1284fe70756b3e8b8bc8701ac83",
+      "adminSessionToken": "71f79ac929380f3f4def24f995c5742e85cafdd2d8e2442a"
+    }
+  ]
+}
