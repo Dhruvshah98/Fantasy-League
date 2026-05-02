@@ -1,40 +1,37 @@
-import React from 'react'
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setScreen } from "../store/leagueSlice";
 
 const LeagueCreated = () => {
     const dispatch = useDispatch();
+    const { activeLeague, createdLeagueCode } = useSelector((state) => state.league);
 
-    const activeLeague = useSelector(
-        (state) => state.league.activeLeague
-    );
     if (!activeLeague) {
-        dispatch(setScreen("HOME"));
         return null;
     }
+
     return (
-        <div>
-            <h2>League Created 🎉</h2>
+        <section className="panel-stack">
+            <div className="panel form-stack success-panel">
+                <p className="section-kicker">League Created</p>
+                <h2>{activeLeague.name}</h2>
+                <p className="muted-copy">
+                    Share this code with participants so they can join and create their teams.
+                </p>
 
-            <p>
-                <strong>League Name:</strong> {activeLeague.name}
-            </p>
+                <div className="code-spotlight">{createdLeagueCode || activeLeague.code}</div>
 
-            <p>
-                <strong>League Code:</strong>{" "}
-                <span style={{ fontSize: "20px" }}>
-                    {activeLeague.code}
-                </span>
-            </p>
+                <div className="button-row">
+                    <button className="primary-button" onClick={() => dispatch(setScreen("LEAGUE_DETAILS"))}>
+                        Open League Dashboard
+                    </button>
+                    <button className="secondary-button" onClick={() => dispatch(setScreen("HOME"))}>
+                        Back Home
+                    </button>
+                </div>
+            </div>
+        </section>
+    );
+};
 
-            <p>Share this code with participants.</p>
-
-            <button onClick={() => dispatch(setScreen("HOME"))}>
-                Go Home
-            </button>
-
-        </div>
-    )
-}
-
-export default LeagueCreated
+export default LeagueCreated;

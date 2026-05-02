@@ -1,21 +1,15 @@
 function StepLeagueSettings({ leagueData, setLeagueData, onNext, onBack }) {
-    return (
-        <div>
-            <h3>League Settings</h3>
+    const maxTeamSize = 50;
 
-            {/* <label>
-                <input
-                    type="checkbox"
-                    checked={leagueData.isPrivate}
-                    onChange={(e) =>
-                        setLeagueData({
-                            ...leagueData,
-                            isPrivate: e.target.checked
-                        })
-                    }
-                />
-                Private League
-            </label> */}
+    return (
+        <div className="form-stack">
+            <h3>League Settings</h3>
+            <p className="muted-copy">
+                The admin decides how many players every fantasy team must contain.
+            </p>
+            <p className="muted-copy">
+                Add at least this many players in the next step.
+            </p>
 
             <div>
                 <label>
@@ -23,21 +17,27 @@ function StepLeagueSettings({ leagueData, setLeagueData, onNext, onBack }) {
                     <input
                         type="number"
                         min="1"
-                        max={leagueData.players.length || 11}
+                        max={maxTeamSize}
                         value={leagueData.teamSize}
-                        onChange={(e) =>
+                        onChange={(event) =>
                             setLeagueData({
                                 ...leagueData,
-                                teamSize: Number(e.target.value)
+                                teamSize: Number(event.target.value)
                             })
                         }
                     />
                 </label>
             </div>
 
-            <div>
-                <button onClick={onBack}>Back</button>
-                <button onClick={onNext}>Next</button>
+            <div className="button-row">
+                <button className="ghost-button" onClick={onBack}>Back</button>
+                <button
+                    className="primary-button"
+                    onClick={onNext}
+                    disabled={!leagueData.teamSize || leagueData.teamSize > maxTeamSize}
+                >
+                    Next
+                </button>
             </div>
         </div>
     );
